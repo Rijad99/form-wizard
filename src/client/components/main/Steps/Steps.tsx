@@ -1,31 +1,44 @@
-export const FirstStep = () => {
+import { PropsWithChildren } from 'react';
+
+import styles from '../Steps/_Steps.module.scss';
+
+export const Step = (props: PropsWithChildren) => {
     return (
-        <div>
-            <h1>First step</h1>
+        <div className={styles.formContentGrid}>
+            <div className={styles.formHeader}>
+                <h1 className={styles.headerTitle}>Personal info</h1>
+                <p className={styles.headerSubtitle}>Please provide your name, email address and phone number.</p>
+            </div>
+            <div className={styles.formContent}>
+                {props.children}
+            </div>
+            <div className={styles.formFooter}>
+
+            </div>
         </div>
     )
 };
 
-export const SecondStep = () => {
+export const FirstStepContent = () => {
     return (
-        <div>
-            <h1>Second step</h1>
-        </div>
+        <h1>Step One Content</h1>
     )
 };
 
-export const ThirdStep = () => {
+export const SecondStepContent = () => {
     return (
-        <div>
-            <h1>Third step</h1>
-        </div>
+        <h1>Step Two Content</h1>
     )
 };
 
-export const FourthStep = () => {
+export const ThirdStepContent = () => {
     return (
-        <div>
-            <h1>Fourth step</h1>
-        </div>
+        <h1>Step Three Content</h1>
+    )
+};
+
+export const FourthStepContent = () => {
+    return (
+        <h1>Step Four Content</h1>
     )
 };
