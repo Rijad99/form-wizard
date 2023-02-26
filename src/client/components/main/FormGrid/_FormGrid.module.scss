@@ -1,3 +1,9 @@
 .formGrid {
     display: grid;
+    grid-template-columns: 16rem 1fr;
+    grid-template-areas: 
+        "steps"
+        "step"
+    ;
+    width: 50%;
 }

@@ -15,12 +15,11 @@ $white: hsl(0, 0%, 100%);
 // Typography
 $heading1: 32px;
 $heading2: 24px;
-$heading3: 16px;
-$heading4: 10px;
-$heading5: 8px;
+$heading3: 18px;
+$heading4: 16px;
+$heading5: 14px;
 $small: 10px;
-$medium: 12px;
-$large: 16px;
+$medium: 14px;
 
 // Typography weights
 $bold: 400;
@@ -28,4 +27,4 @@ $bolder: 500;
 $boldest: 700;
 
 // Shadows
-$lightShadow: 0 4px 15px rgba($lightGray, 0.25);
+$lightShadow: 0 4px 25px rgba($lightGray, 0.5);
