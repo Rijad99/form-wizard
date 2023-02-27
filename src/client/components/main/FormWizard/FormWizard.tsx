@@ -5,7 +5,7 @@ import { Card } from '../../common/Card/Card';
 import { StepItem } from '../StepItem/StepItem';
 import { Step, FirstStepContent, SecondStepContent, ThirdStepContent, FourthStepContent  } from '../Steps/Steps';
 
-import { stepsData } from '../../../data/stepsData';
+import { stepsData, stepHeaderData } from '../../../data/stepsData';
 
 import styles from "../FormWizard/_FormWizard.module.scss";
 import stepItemStyles from '../StepItem/_StepItem.module.scss';
@@ -23,7 +23,7 @@ const StepsList = (props: PropsWithChildren) => {
 };
 
 export const FormWizard = () => {
-    const [step, setStep] = useState<number>(1);
+    const [step, setStep] = useState<number>(0);
 
     const handleStepChange = (stepNumber: number) => {
         setStep(stepNumber);
@@ -31,13 +31,13 @@ export const FormWizard = () => {
 
     const currentStep = (step: number) => {
         switch(step) {
-            case 1:
+            case 0:
                 return <FirstStepContent />
-            case 2:
+            case 1:
                 return <SecondStepContent />
-            case 3:
+            case 2:
                 return <ThirdStepContent />
-            case 4:
+            case 3:
                 return <FourthStepContent />
         };
     };
@@ -54,7 +54,7 @@ export const FormWizard = () => {
                         })
                     }   
                 </StepsList>
-                <Step>
+                <Step stepTitle={stepHeaderData[step].stepTitle} stepSubtitle={stepHeaderData[step].stepSubtitle}>
                     {currentStep(step)}
                 </Step>
             </Card>

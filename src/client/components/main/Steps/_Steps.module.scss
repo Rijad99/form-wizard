@@ -13,27 +13,29 @@
     padding: 32px 64px;
 }
 
-.formHeader {
+.stepHeader {
     grid-area: header;
 
-    .headerTitle {
+    .stepTitle {
         font-size: $heading1;
         font-weight: $boldest;
         color: $marineBlue;
         line-height: 1.2;
     }
 
-    .headerSubtitle {
+    .stepSubtitle {
         font-size: $medium;
         font-weight: $bold;
         color: $coolGray;
     }
 }
 
-.formContent {
+.stepContent {
     grid-area: content;
 }
 
-.formFooter {
+.stepFooter {
     grid-area: footer;
+    display: flex;
+    justify-content: space-between;
 }
