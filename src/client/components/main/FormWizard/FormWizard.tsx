@@ -49,12 +49,12 @@ export const FormWizard = () => {
                     {
                         stepsData.map(step => {
                             return (
-                                <StepItem key={step.stepNumber} onClick={() => handleStepChange(step.stepNumber)} stepNumber={step.stepNumber} stepTitle={step.stepTitle} />
+                                <StepItem key={step.stepNumber} onClick={() => handleStepChange(step.stepNumber)} stepNumber={step.stepNumber + 1} stepTitle={step.stepTitle} />
                             )
                         })
                     }   
                 </StepsList>
-                <Step stepTitle={stepHeaderData[step].stepTitle} stepSubtitle={stepHeaderData[step].stepSubtitle}>
+                <Step stepTitle={stepHeaderData[step].stepTitle} stepSubtitle={stepHeaderData[step].stepSubtitle} stepNumber={step}>
                     {currentStep(step)}
                 </Step>
             </Card>

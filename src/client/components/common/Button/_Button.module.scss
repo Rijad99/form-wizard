@@ -1,6 +1,7 @@
 @import "../../../scss/variables";
 
 .btn {
+    background-color: transparent;
     border: 0;
     border-radius: 16px;
     outline: none;
@@ -23,4 +24,13 @@
 .btnNext {
     color: $white;
     background-color: $marineBlue;
+}
+
+.btnBack {
+    color: $coolGray;
+}
+
+.btnConfirm {
+    color: $white;
+    background-color: $purplishBlue;
 }
