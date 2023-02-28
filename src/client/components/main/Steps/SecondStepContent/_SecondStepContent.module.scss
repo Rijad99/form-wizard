@@ -1,6 +1,42 @@
+@import "../../../../scss/variables";
+
 .stepContent1 {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.planCardsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.planCard {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid $lightGray;
+    border-radius: 12px;
+    transition: all 300ms ease;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $alabaster;
+        box-shadow: $lightShadow;
+    }
+
+    img {
+        object-fit: contain;
+        width: 46px;
+    }
+}
+
+.planCardPricing {
+    margin-top: 2rem;
+}
+
+.planName {
+    font-size: $heading4;
+    font-weight: $bolder;
+    color: $marineBlue;
 }
