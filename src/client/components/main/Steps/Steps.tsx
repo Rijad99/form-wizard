@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 import { Button } from '../../common/Button/Button';
+import { Input } from '../../common/FormControls/FormControls';
 
 import styles from '../Steps/_Steps.module.scss';
 import buttonStyles from '../../common/Button/_Button.module.scss';
@@ -13,6 +14,7 @@ export interface StepProps {
 }
 
 export const Step = (props: PropsWithChildren<StepProps>) => {
+
     return (
         <div className={styles.formContentGrid}>
             <div className={styles.stepHeader}>
@@ -39,7 +41,11 @@ export const Step = (props: PropsWithChildren<StepProps>) => {
 
 export const FirstStepContent = () => {
     return (
-        <div></div>
+        <div className={styles.stepContent0}>
+            <Input type='text' id='step-one-client_name' additionalClasses={`${utilityClasses.mb22}`} label='Name' placeholder='e.g. Stephen King' spellCheck={false} />
+            <Input type='text' id='step-one-client_email_address' additionalClasses={`${utilityClasses.mb22}`} label='Email Address' placeholder='e.g. stephenking@lorem.com' spellCheck={false} />
+            <Input type='text' id='step-one-client_phone_number' label='Phone Number' placeholder='e.g. +1 234 567 890' spellCheck={false} />
+        </div>
     )
 };
 

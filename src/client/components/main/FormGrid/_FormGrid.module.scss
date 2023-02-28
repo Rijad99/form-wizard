@@ -1,9 +1,11 @@
 .formGrid {
     display: grid;
     grid-template-columns: 16rem 1fr;
+    grid-template-rows: 100%;
     grid-template-areas: 
         "steps"
         "step"
     ;
-    width: 800px;
+    width: 900px;
+    height: 650px;
 }
