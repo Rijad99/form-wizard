@@ -35,12 +35,13 @@
 }
 
 .stepCircle {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     @include center;
     margin-right: 1rem;
     color: $white;
-    border: 2px solid $white;
+    font-size: $medium;
+    border: 1px solid $white;
     border-radius: 100%;
     transition: all 300ms ease;
 }
@@ -60,6 +61,16 @@
 }
 
 .stepNumber, .stepTitle {
-    font-size: $medium;
+    font-size: $small;
     text-transform: uppercase;
+}
+
+
+.activeStep {
+    
+    .stepCircle {
+        background-color: $lightBlue;
+        border-color: transparent;
+        color: $marineBlue
+    }
 }

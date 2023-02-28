@@ -23,10 +23,10 @@ const StepsList = (props: PropsWithChildren) => {
 };
 
 export const FormWizard = () => {
-    const [step, setStep] = useState<number>(0);
+    const [activeStep, setActiveStep] = useState<number>(0);
 
     const handleStepChange = (stepNumber: number) => {
-        setStep(stepNumber);
+        setActiveStep(stepNumber);
     }
 
     const currentStep = (step: number) => {
@@ -49,13 +49,13 @@ export const FormWizard = () => {
                     {
                         stepsData.map(step => {
                             return (
-                                <StepItem key={step.stepNumber} onClick={() => handleStepChange(step.stepNumber)} stepNumber={step.stepNumber + 1} stepTitle={step.stepTitle} />
+                                <StepItem key={step.stepNumber} active={activeStep === step.stepNumber} onClick={() => handleStepChange(step.stepNumber)} stepNumber={step.stepNumber + 1} stepTitle={step.stepTitle} />
                             )
                         })
                     }   
                 </StepsList>
-                <Step stepTitle={stepHeaderData[step].stepTitle} stepSubtitle={stepHeaderData[step].stepSubtitle} stepNumber={step}>
-                    {currentStep(step)}
+                <Step stepTitle={stepHeaderData[activeStep].stepTitle} stepSubtitle={stepHeaderData[activeStep].stepSubtitle} stepNumber={activeStep}>
+                    {currentStep(activeStep)}
                 </Step>
             </Card>
         </Container>
