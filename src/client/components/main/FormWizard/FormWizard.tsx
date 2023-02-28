@@ -3,11 +3,15 @@ import { useState, PropsWithChildren } from 'react'
 import { Container } from '../../common/Container/Container';
 import { Card } from '../../common/Card/Card';
 import { StepItem } from '../StepItem/StepItem';
-import { Step, FirstStepContent, SecondStepContent, ThirdStepContent, FourthStepContent  } from '../Steps/Steps';
+import { Step } from '../Steps/Step';
+import { FirstStepContent } from '../Steps/FirstStepContent/FirstStepContent';
+import { SecondStepContent } from '../Steps/SecondStepContent/SecondStepContent';
+import { ThirdStepContent } from '../Steps/ThirdStepContent/ThirdStepContent';
+import { FourthStepContent } from '../Steps/FourthStepContent/FourthStepContent';
 
 import { stepsData, stepHeaderData } from '../../../data/stepsData';
 
-import styles from "../FormWizard/_FormWizard.module.scss";
+import styles from '../FormWizard/_FormWizard.module.scss';
 import stepItemStyles from '../StepItem/_StepItem.module.scss';
 import gridStyle from "../FormGrid/_FormGrid.module.scss";
 

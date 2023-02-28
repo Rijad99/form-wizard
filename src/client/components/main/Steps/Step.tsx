@@ -1,9 +1,8 @@
 import { PropsWithChildren } from 'react';
 
 import { Button } from '../../common/Button/Button';
-import { Input } from '../../common/FormControls/FormControls';
 
-import styles from '../Steps/_Steps.module.scss';
+import styles from '../Steps/_Step.module.scss';
 import buttonStyles from '../../common/Button/_Button.module.scss';
 import utilityClasses from '../../../scss/_utilities.module.scss';
 
@@ -50,33 +49,5 @@ export const Step = (props: PropsWithChildren<StepProps>) => {
                 {renderStepFooterButtons(props.stepNumber!)}
             </div>
         </div>
-    )
-};
-
-export const FirstStepContent = () => {
-    return (
-        <div className={styles.stepContent0}>
-            <Input type='text' id='step-one-client_name' additionalClasses={`${utilityClasses.mb22}`} label='Name' placeholder='e.g. Stephen King' spellCheck={false} />
-            <Input type='text' id='step-one-client_email_address' additionalClasses={`${utilityClasses.mb22}`} label='Email Address' placeholder='e.g. stephenking@lorem.com' spellCheck={false} />
-            <Input type='text' id='step-one-client_phone_number' label='Phone Number' placeholder='e.g. +1 234 567 890' spellCheck={false} />
-        </div>
-    )
-};
-
-export const SecondStepContent = () => {
-    return (
-        <div></div>
-    )
-};
-
-export const ThirdStepContent = () => {
-    return (
-        <div></div>
-    )
-};
-
-export const FourthStepContent = () => {
-    return (
-        <div></div>
     )
 };

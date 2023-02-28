@@ -1,5 +1,5 @@
 import { StepItemProps } from '../components/main/StepItem/StepItem';
-import { StepProps } from '../components/main/Steps/Steps';
+import { StepProps } from '../components/main/Steps/Step';
 
 export const stepsData: StepItemProps[] = [
     {
