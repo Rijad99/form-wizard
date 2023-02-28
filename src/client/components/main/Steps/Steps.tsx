@@ -15,6 +15,28 @@ export interface StepProps {
 
 export const Step = (props: PropsWithChildren<StepProps>) => {
 
+    const renderStepFooterButtons = (step: number) => {
+        switch(step) {
+            case 0: 
+                return <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} />
+            case 1:
+            case 2:
+                return (
+                    <>
+                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} />
+                        <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} />
+                    </>
+                )
+            case 3:
+                return (
+                    <>
+                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} />
+                        <Button text="Confirm" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnConfirm}`} />
+                    </>
+                )
+        }
+    }
+
     return (
         <div className={styles.formContentGrid}>
             <div className={styles.stepHeader}>
@@ -25,15 +47,7 @@ export const Step = (props: PropsWithChildren<StepProps>) => {
                 {props.children}
             </div>
             <div className={styles.stepFooter}>
-                {
-                    props.stepNumber !== 0 && <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} />
-                }
-                {
-                    props.stepNumber !== 3 && <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} />
-                }
-                {
-                    props.stepNumber === 3 && <Button text="Confirm" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnConfirm}`} />
-                }
+                {renderStepFooterButtons(props.stepNumber!)}
             </div>
         </div>
     )
