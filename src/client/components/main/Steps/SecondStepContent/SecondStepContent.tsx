@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import styles from '../SecondStepContent/_SecondStepContent.module.scss';
 
@@ -10,23 +10,26 @@ export interface PlanCardProps {
     name: string,
     priceMonthly: string,
     priceYearly: string,
-    priceMonthlyYearly?: string
+    priceMonthlyYearly?: string,
     onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
-const PlanCard = (props: PlanCardProps) => {
+const PlanCard = forwardRef<HTMLDivElement, PlanCardProps>((props, ref) => {
     return (
-        <div className={styles.planCard} onClick={props.onClick}>
+        <div ref={ref} className={styles.planCard} onClick={props.onClick}>
             <div>
                 <img src={props.iconPath} />
             </div>
-            <div className={styles.planCardPricing}>
+            <div className={`${styles.planCardPricing} ${props.priceMonthlyYearly === 'yearly' ? styles.planCardPricingYearly : ""}`}>
                 <span className={styles.planName}>{props.name}</span>
                 <span className={styles.planPrice}>{`${props.priceMonthlyYearly === 'monthly' ? props.priceMonthly : props.priceYearly}`}</span>
+                {
+                    props.priceMonthlyYearly === 'yearly' && <span className={styles.freePeriod}>2 months free</span>
+                }
             </div>
         </div>
     )
-}
+})
 
 interface ToggleProps {
     plan: string,
@@ -46,10 +49,22 @@ const Toggle = (props: ToggleProps) => {
 }
 
 export const SecondStepContent = () => {
-    const [toggle, setToggle] = useState<string>('monthly');
+    const planCardRefs: Array<HTMLDivElement> = [];
 
-    const handlePlanCardChange = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.currentTarget.classList.toggle(styles.shown);
+    const [toggle, setToggle] = useState<string>('monthly');
+    const [selectedPlan, setSelectedPlan] = useState<string>('0');
+
+    const handlePlanCardChange = (e: React.MouseEvent<HTMLDivElement>, planId: string) => {
+        if (planId !== selectedPlan && selectedPlan === '0') {
+
+            setSelectedPlan(planId);
+            e.currentTarget.classList.toggle(styles.shown);
+        } else {
+            planCardRefs[+selectedPlan - 1].classList.remove(styles.shown);
+
+            setSelectedPlan(planId);
+            e.currentTarget.classList.toggle(styles.shown);
+        }
     }
 
     const handleToggleChange = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -64,7 +79,7 @@ export const SecondStepContent = () => {
                 {
                     plansData.map(plan => {
                         return (
-                            <PlanCard key={plan.id} iconPath={plan.iconPath} name={plan.name} priceMonthlyYearly={toggle} priceMonthly={plan.priceMonthly} priceYearly={plan.priceYearly} onClick={(e) => handlePlanCardChange(e)} />
+                            <PlanCard key={plan.id} ref={el => el && planCardRefs.push(el)} iconPath={plan.iconPath} name={plan.name} priceMonthlyYearly={toggle} priceMonthly={plan.priceMonthly} priceYearly={plan.priceYearly} onClick={(e) => handlePlanCardChange(e, plan.id!)} />
                         )
                     })
                 }
