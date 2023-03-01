@@ -9,3 +9,13 @@
     width: 900px;
     height: 650px;
 }
+
+@media screen and (max-width: 992px) {
+
+    .formGrid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 100px auto;
+        width: 85%;
+        height: 750px;
+    }
+}

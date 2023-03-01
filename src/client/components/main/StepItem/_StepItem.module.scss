@@ -65,12 +65,55 @@
     text-transform: uppercase;
 }
 
-
 .activeStep {
     
     .stepCircle {
         background-color: $lightBlue;
         border-color: transparent;
         color: $marineBlue
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    .stepsList {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .step {
+            margin-bottom: unset;
+        }
+    }
+}
+
+@media screen and (max-width: 828px) {
+
+    .stepsList {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .step {
+            margin-bottom: unset;
+        }
+
+        .step:not(:last-child) {
+            margin-right: 3rem;
+        }
+    }
+
+    .stepInfo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 660px) {
+
+    .stepsList {
+
+        .step {
+            margin-right: 1rem !important;
+        }
     }
 }
