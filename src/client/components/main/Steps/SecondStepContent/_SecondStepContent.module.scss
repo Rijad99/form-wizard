@@ -80,8 +80,9 @@
 
     .pricingPlan {
         font-size: $medium;
-        color: $marineBlue;
+        color: $lightGray;
         font-weight: $boldest;
+        transition: all 300ms ease;
     }
 
     .toggle {
@@ -102,7 +103,11 @@
         }
 
         .circle.toRight {
-            transform: translate(24px, 4px);
+            transform: translate(24px, 4px);       
         }
     }
+}
+
+.activePlan {
+    color: $marineBlue !important;
 }
