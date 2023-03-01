@@ -100,5 +100,9 @@
             transition: all 300ms ease;
             cursor: pointer;
         }
+
+        .circle.toRight {
+            transform: translate(24px, 4px);
+        }
     }
 }

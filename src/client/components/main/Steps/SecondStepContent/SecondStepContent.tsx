@@ -28,7 +28,7 @@ const PlanCard = (props: PlanCardProps) => {
 }
 
 interface ToggleProps {
-    onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
+    onClick: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const Toggle = (props: ToggleProps) => {
@@ -50,6 +50,12 @@ export const SecondStepContent = () => {
         e.currentTarget.classList.toggle(styles.shown);
     }
 
+    const handleToggleChange = (e: React.MouseEvent<HTMLDivElement>) => {
+        setToggle('yearly');
+
+        e.currentTarget.classList.toggle(styles.toRight);
+    }
+
     return (
         <div className={styles.stepContent1}>
             <div className={styles.planCardsGrid}>
@@ -57,7 +63,7 @@ export const SecondStepContent = () => {
                 <PlanCard iconPath={iconAdvanced} name='Advanced' price='$12/mo' onClick={(e) => handlePlanCardChange(e)} />
                 <PlanCard iconPath={iconPro} name='Pro' price='$15/mo' onClick={(e) => handlePlanCardChange(e)} />
             </div>
-            <Toggle />
+            <Toggle onClick={(e) => handleToggleChange(e)} />
         </div>
     )
 };
