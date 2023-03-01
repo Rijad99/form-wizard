@@ -18,6 +18,7 @@
     border: 1px solid $lightGray;
     border-radius: 12px;
     transition: all 300ms ease;
+    overflow: hidden;
     cursor: pointer;
 
     &:hover {
@@ -32,11 +33,38 @@
 }
 
 .planCardPricing {
+    display: flex;
+    flex-direction: column;
     margin-top: 2rem;
+    transform: translateY(20px);
+    transition: all 300ms ease;
 }
 
 .planName {
     font-size: $heading4;
     font-weight: $bolder;
     color: $marineBlue;
+}
+
+.planPrice {
+    font-size: $small;
+    font-weight: $bold;
+    color: $coolGray;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms ease;
+}
+
+.planCard.shown {
+    background-color: $alabaster;
+    box-shadow: $lightShadow;
+
+    .planCardPricing {
+        transform: translateY(0px);
+    }
+
+    .planPrice {
+        opacity: 1;
+        visibility: visible;
+    }
 }
