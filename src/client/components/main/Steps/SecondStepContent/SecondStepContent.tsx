@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import styles from '../SecondStepContent/_SecondStepContent.module.scss';
 
 import iconArcade from "../../../../../images/icons/icon-arcade.svg";
@@ -25,7 +27,25 @@ const PlanCard = (props: PlanCardProps) => {
     )
 }
 
+interface ToggleProps {
+    onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
+}
+
+const Toggle = (props: ToggleProps) => {
+    return (
+        <div className={styles.toggleContainer}>
+            <span className={styles.pricingPlan}>Monthly</span>
+            <div className={styles.toggle}>
+                <div className={styles.circle} onClick={props.onClick}></div>
+            </div>
+            <span className={styles.pricingPlan}>Yearly</span>
+        </div>
+    )
+}
+
 export const SecondStepContent = () => {
+    const [toggle, setToggle] = useState<string>('monthly');
+
     const handlePlanCardChange = (e: React.MouseEvent<HTMLDivElement>) => {
         e.currentTarget.classList.toggle(styles.shown);
     }
@@ -37,6 +57,7 @@ export const SecondStepContent = () => {
                 <PlanCard iconPath={iconAdvanced} name='Advanced' price='$12/mo' onClick={(e) => handlePlanCardChange(e)} />
                 <PlanCard iconPath={iconPro} name='Pro' price='$15/mo' onClick={(e) => handlePlanCardChange(e)} />
             </div>
+            <Toggle />
         </div>
     )
 };
