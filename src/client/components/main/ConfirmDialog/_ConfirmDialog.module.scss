@@ -1,0 +1,28 @@
+@import "../../../scss/variables";
+
+.confirmDialog {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4rem;
+}
+
+.confirmIcon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.8rem;
+}
+
+.confirmTitle {
+    color: $marineBlue;
+    margin-bottom: 0.8rem;
+}
+
+.confirmText {
+    font-size: $medium;
+    color: $coolGray;
+    text-align: center;
+}

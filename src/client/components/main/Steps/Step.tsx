@@ -9,7 +9,10 @@ import utilityClasses from '../../../scss/_utilities.module.scss';
 export interface StepProps {
     stepTitle: string,
     stepSubtitle: string,
-    stepNumber?: number
+    stepNumber?: number,
+    onClickNext?: () => void,
+    onClickBack?: () => void,
+    onClickConfirm?: () => void
 }
 
 export const Step = (props: PropsWithChildren<StepProps>) => {
@@ -17,20 +20,20 @@ export const Step = (props: PropsWithChildren<StepProps>) => {
     const renderStepFooterButtons = (step: number) => {
         switch(step) {
             case 0: 
-                return <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} />
+                return <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} onClick={props.onClickNext} />
             case 1:
             case 2:
                 return (
                     <>
-                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} />
-                        <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} />
+                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} onClick={props.onClickBack} />
+                        <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} onClick={props.onClickNext} />
                     </>
                 )
             case 3:
                 return (
                     <>
-                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} />
-                        <Button text="Confirm" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnConfirm}`} />
+                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} onClick={props.onClickBack} />
+                        <Button text="Confirm" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnConfirm}`} onClick={props.onClickConfirm} />
                     </>
                 )
         }

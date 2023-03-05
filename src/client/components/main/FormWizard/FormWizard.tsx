@@ -8,6 +8,7 @@ import { FirstStepContent } from '../Steps/FirstStepContent/FirstStepContent';
 import { SecondStepContent } from '../Steps/SecondStepContent/SecondStepContent';
 import { ThirdStepContent } from '../Steps/ThirdStepContent/ThirdStepContent';
 import { FourthStepContent } from '../Steps/FourthStepContent/FourthStepContent';
+import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 
 import { stepsData, stepHeaderData } from '../../../data/stepsData';
 
@@ -27,7 +28,7 @@ const StepsList = (props: PropsWithChildren) => {
 };
 
 export const FormWizard = () => {
-    const [activeStep, setActiveStep] = useState<number>(0);
+    const [activeStep, setActiveStep] = useState<number>(4);
 
     const handleStepChange = (stepNumber: number) => {
         setActiveStep(stepNumber);
@@ -43,8 +44,22 @@ export const FormWizard = () => {
                 return <ThirdStepContent />
             case 3:
                 return <FourthStepContent />
+            case 4:
+                return <ConfirmDialog />
         };
     };
+
+    const handleNextStep = (activeStep: number) => {
+        setActiveStep(activeStep + 1);
+    }
+
+    const handlePreviousStep = (activeStep: number) => {
+        setActiveStep(activeStep - 1);
+    }
+
+    const handleConfirm = () => {
+        setActiveStep(4)
+    }
 
     return (
         <Container additionalClasses={styles.formWizardContainer}>
@@ -58,9 +73,13 @@ export const FormWizard = () => {
                         })
                     }   
                 </StepsList>
-                <Step stepTitle={stepHeaderData[activeStep].stepTitle} stepSubtitle={stepHeaderData[activeStep].stepSubtitle} stepNumber={activeStep}>
-                    {currentStep(activeStep)}
-                </Step>
+                {
+                    activeStep !== 4 ?
+                    <Step stepTitle={stepHeaderData[activeStep].stepTitle} stepSubtitle={stepHeaderData[activeStep].stepSubtitle} stepNumber={activeStep} onClickNext={() => handleNextStep(activeStep)} onClickBack={() => handlePreviousStep(activeStep)} onClickConfirm={() => handleConfirm()} >
+                        {currentStep(activeStep)}
+                    </Step> :
+                    <ConfirmDialog />
+                }
             </Card>
         </Container>
     )
