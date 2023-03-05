@@ -28,7 +28,7 @@ const StepsList = (props: PropsWithChildren) => {
 };
 
 export const FormWizard = () => {
-    const [activeStep, setActiveStep] = useState<number>(4);
+    const [activeStep, setActiveStep] = useState<number>(0);
 
     const handleStepChange = (stepNumber: number) => {
         setActiveStep(stepNumber);
