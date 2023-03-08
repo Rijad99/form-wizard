@@ -1,6 +1,56 @@
+@import "../../../../scss/variables";
+
 .stepContent2 {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.addonsGrid {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.addonItem {
+    display: grid;
+    grid-template-columns: 60px 1fr 80px;
+    align-items: center;
+    border: 1px solid $lightGray;
+    border-radius: 10px;
+    padding: 1.2rem 0;
+    transition: all 300ms ease;
+    cursor: pointer;
+
+    &:hover {
+        border-color: $marineBlue;
+
+        .addonPrice {
+            color: $purplishBlue;
+        }
+    }
+
+    .addonCheckbox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .addonTitle {
+        font-size: $heading4;
+        color: $marineBlue;
+        line-height: 1;
+    }
+
+    .addonDescription {
+        font-size: $medium;
+        color: $coolGray;
+    }
+
+    .addonPrice {
+        font-size: $medium;
+        font-weight: $bolder;
+        color: $coolGray;
+        transition: all 300ms ease;
+    }
 }

@@ -1,0 +1,66 @@
+@import "../../../scss/variables";
+
+.checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $lightGray;
+    border-radius: 7px;
+    transition: all 300ms ease;
+    cursor: pointer;
+
+    &::before {
+        content: "";
+        position: absolute;
+        right: 8px;
+        top: 4px;
+        width: 1px;
+        height: 8px;
+        background-color: $white;
+        transform: rotate(30deg);
+        opacity: 0;
+    }
+    
+    &::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 8px;
+        width: 1px;
+        height: 4px;
+        background-color: $white;
+        transform: rotate(-45deg);
+        opacity: 0;
+    }
+          
+    .customCheckbox {
+        display: none;
+
+        + label {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin-left: 28px;
+            color: $white;
+            white-space: nowrap;
+            transition: all 300ms ease;
+            cursor: pointer;
+        }
+    }
+}
+
+.checkbox.checkboxChecked {
+    border-radius: 7px;
+    background: $purplishBlue;
+    border-color: $purplishBlue;
+
+    &::before, &::after {
+        opacity: 1;
+    }
+
+    + label::before {
+            background-color: $purplishBlue;
+            color: $white;
+    }
+}
