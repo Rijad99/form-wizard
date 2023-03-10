@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 import styles from '../SecondStepContent/_SecondStepContent.module.scss';
 
@@ -11,12 +11,13 @@ export interface PlanCardProps {
     priceMonthly: string,
     priceYearly: string,
     priceMonthlyYearly?: string,
+    additionalClasses?: string,
     onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const PlanCard = forwardRef<HTMLDivElement, PlanCardProps>((props, ref) => {
     return (
-        <div ref={ref} className={styles.planCard} onClick={props.onClick}>
+        <div ref={ref} className={`${styles.planCard} ${props?.additionalClasses ? props.additionalClasses : ''}`} onClick={props.onClick}>
             <div>
                 <img src={props.iconPath} />
             </div>
@@ -33,12 +34,13 @@ const PlanCard = forwardRef<HTMLDivElement, PlanCardProps>((props, ref) => {
 
 interface ToggleProps {
     plan: string,
+    additionalClasses?: string,
     onClick: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const Toggle = (props: ToggleProps) => {
     return (
-        <div className={styles.toggleContainer}>
+        <div className={`${styles.toggleContainer} ${props?.additionalClasses ? props.additionalClasses : ''}`}>
             <span className={`${styles.pricingPlan} ${props.plan === 'monthly' ? styles.activePlan : ''}`}>Monthly</span>
             <div className={styles.toggle}>
                 <div className={styles.circle} onClick={props.onClick}></div>
@@ -54,16 +56,28 @@ export const SecondStepContent = () => {
     const [toggle, setToggle] = useState<string>('monthly');
     const [selectedPlan, setSelectedPlan] = useState<string>('0');
 
+    useEffect(() => {
+        const plan = localStorage.getItem('selectedPlan') || '0';
+
+        if (selectedPlan !== plan) {
+            setSelectedPlan(plan);
+        }
+    }, []);
+
     const handlePlanCardChange = (e: React.MouseEvent<HTMLDivElement>, planId: string) => {
         if (planId !== selectedPlan && selectedPlan === '0') {
 
             setSelectedPlan(planId);
             e.currentTarget.classList.toggle(styles.shown);
+
+            localStorage.setItem('selectedPlan', JSON.stringify(+planId));
         } else {
             planCardRefs[+selectedPlan - 1].classList.remove(styles.shown);
 
             setSelectedPlan(planId);
             e.currentTarget.classList.toggle(styles.shown);
+
+            localStorage.setItem('selectedPlan', JSON.stringify(+planId));
         }
     }
 
@@ -79,7 +93,7 @@ export const SecondStepContent = () => {
                 {
                     plansData.map(plan => {
                         return (
-                            <PlanCard key={plan.id} ref={el => el && planCardRefs.push(el)} iconPath={plan.iconPath} name={plan.name} priceMonthlyYearly={toggle} priceMonthly={plan.priceMonthly} priceYearly={plan.priceYearly} onClick={(e) => handlePlanCardChange(e, plan.id!)} />
+                            <PlanCard key={plan.id} ref={el => el && planCardRefs.push(el)} additionalClasses={`${selectedPlan === plan.id && styles.shown}`} iconPath={plan.iconPath} name={plan.name} priceMonthlyYearly={toggle} priceMonthly={plan.priceMonthly} priceYearly={plan.priceYearly} onClick={(e) => handlePlanCardChange(e, plan.id!)} />
                         )
                     })
                 }
