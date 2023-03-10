@@ -3,28 +3,21 @@ import { useState } from "react";
 import styles from '../Checkbox/_Checkbox.module.scss';
 
 interface CheckboxProps {
+    id: string,
     labelText?: string,
+    checked: boolean
+    onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
 export const Checkbox = (props: CheckboxProps) => {
-    const [isCbActive, setIsCbActive] = useState<boolean>(false);
-
-    const changeCheckboxState = () => {
-        !isCbActive ? setIsCbActive(true) : setIsCbActive(false);
-    }
-
-    const handleChange = () => {
-        changeCheckboxState()
-    }
-
     return (
         <>
-            <div className={`${styles.checkbox} ${isCbActive ? styles.checkboxChecked : styles.checkbox}`} onClick={() => handleChange()}>
-                <input type="checkbox" id="remember" className={styles.customCheckbox} />
+            <div className={`${styles.checkbox} ${props.checked ? styles.checkboxChecked : styles.checkbox}`}>
+                <input type="checkbox" id={`checkbox-${props.id}`} className={styles.customCheckbox} checked={props.checked} onChange={props.onChange} />
                 {
                     props.labelText 
                     ?
-                    <label htmlFor="remember">{props.labelText}</label> 
+                    <label htmlFor={`checkbox-${props.id}`}>{props.labelText}</label> 
                     :
                     null
                 }

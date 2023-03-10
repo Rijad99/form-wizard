@@ -64,3 +64,22 @@
     font-size: $medium;
     color: $coolGray;
 }
+
+.priceSummary {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+}
+
+.summaryText {
+    font-size: $medium;
+    color: $coolGray;
+    line-height: 0.9;
+    font-weight: $bold;
+}
+
+.summaryPrice {
+    color: $purplishBlue;
+    font-weight: $boldest;
+    font-size: $medium;
+}

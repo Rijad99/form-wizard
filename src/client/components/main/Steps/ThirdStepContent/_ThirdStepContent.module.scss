@@ -54,3 +54,12 @@
         transition: all 300ms ease;
     }
 }
+
+.addonItem.selectedAddon {
+    border-color: $purplishBlue;
+    background-color: $magnolia;
+
+    .addonPrice {
+        color: $purplishBlue;
+    }
+}

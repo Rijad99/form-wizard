@@ -2,11 +2,14 @@ import styles from '../FourthStepContent/_FourthStepContent.module.scss';
 
 export const FourthStepContent = () => {
     return (
-        <div className={styles.summaryContainer}>
-            <SelectedPlan name='Arcade (Monthly)' linkToStep='Change' price='$9/mo' />
-            <SelectedAddOn name='Online service' price='+1$/mo' />
-            <SelectedAddOn name='Larger storage' price='+2$/mo' />
-        </div>
+        <>
+            <div className={styles.summaryContainer}>
+                <SelectedPlan name='Arcade (Monthly)' linkToStep='Change' price='$9/mo' />
+                <SelectedAddOn name='Online service' price='+1$/mo' />
+                <SelectedAddOn name='Larger storage' price='+2$/mo' />
+            </div>
+            <PriceSummary text='Total (per month)' price='+$12/mo' />
+        </> 
     )
 };
 
@@ -38,6 +41,20 @@ const SelectedAddOn = (props: SelectedAddOnProps) => {
         <div className={styles.addOn}>
             <span className={styles.addonName}>{props.name}</span>
             <span className={styles.addonPrice}>{props.price}</span>
+        </div>
+    )
+}
+
+interface PriceSummaryProps {
+    text: string,
+    price: string
+}
+
+const PriceSummary = (props: PriceSummaryProps) => {
+    return (
+        <div className={styles.priceSummary}>
+            <span className={styles.summaryText}>{props.text}</span>
+            <span className={styles.summaryPrice}>{props.price}</span>
         </div>
     )
 }
