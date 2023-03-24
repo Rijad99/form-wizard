@@ -1,13 +1,10 @@
 import { useState, PropsWithChildren } from 'react'
+import { Outlet } from "react-router-dom";
 
 import { Container } from '../../common/Container/Container';
 import { Card } from '../../common/Card/Card';
 import { StepItem } from '../StepItem/StepItem';
 import { Step } from '../Steps/Step';
-import { FirstStepContent } from '../Steps/FirstStepContent/FirstStepContent';
-import { SecondStepContent } from '../Steps/SecondStepContent/SecondStepContent';
-import { ThirdStepContent } from '../Steps/ThirdStepContent/ThirdStepContent';
-import { FourthStepContent } from '../Steps/FourthStepContent/FourthStepContent';
 import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 
 import { stepsData, stepHeaderData } from '../../../data/stepsData';
@@ -34,21 +31,6 @@ export const FormWizard = () => {
         setActiveStep(stepNumber);
     }
 
-    const currentStep = (step: number) => {
-        switch(step) {
-            case 0:
-                return <FirstStepContent />
-            case 1:
-                return <SecondStepContent />
-            case 2:
-                return <ThirdStepContent />
-            case 3:
-                return <FourthStepContent />
-            case 4:
-                return <ConfirmDialog />
-        };
-    };
-
     const handleNextStep = (activeStep: number) => {
         setActiveStep(activeStep + 1);
     }
@@ -68,7 +50,14 @@ export const FormWizard = () => {
                     {
                         stepsData.map(step => {
                             return (
-                                <StepItem key={step.stepNumber} active={activeStep === step.stepNumber} onClick={() => handleStepChange(step.stepNumber)} stepNumber={step.stepNumber + 1} stepTitle={step.stepTitle} />
+                                <StepItem 
+                                    key={step.stepNumber} 
+                                    path={step.path}
+                                    active={activeStep === step.stepNumber} 
+                                    onClick={() => handleStepChange(step.stepNumber)} 
+                                    stepNumber={step.stepNumber + 1} 
+                                    stepTitle={step.stepTitle} 
+                                />
                             )
                         })
                     }   
@@ -76,7 +65,7 @@ export const FormWizard = () => {
                 {
                     activeStep !== 4 ?
                     <Step stepTitle={stepHeaderData[activeStep].stepTitle} stepSubtitle={stepHeaderData[activeStep].stepSubtitle} stepNumber={activeStep} onClickNext={() => handleNextStep(activeStep)} onClickBack={() => handlePreviousStep(activeStep)} onClickConfirm={() => handleConfirm()} >
-                        {currentStep(activeStep)}
+                        <Outlet />
                     </Step> :
                     <ConfirmDialog />
                 }

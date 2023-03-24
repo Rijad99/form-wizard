@@ -1,7 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { App } from './App';
+import { FormWizard } from './client/components/main/FormWizard/FormWizard';
+import { FirstStepContent } from './client/components/main/Steps/FirstStepContent/FirstStepContent';
+import { FourthStepContent } from './client/components/main/Steps/FourthStepContent/FourthStepContent';
+import { SecondStepContent } from './client/components/main/Steps/SecondStepContent/SecondStepContent';
+import { ThirdStepContent } from './client/components/main/Steps/ThirdStepContent/ThirdStepContent';
+
+import "./client/scss/_global.scss";
+
+const router = createBrowserRouter([
+	{
+	  path: "/",
+	  element: <FormWizard />,
+	  children: [
+		{
+			path: "/",
+			element: <FirstStepContent />,
+		  },
+		{
+		  path: "info",
+		  element: <FirstStepContent />,
+		},
+		{
+			path: "plan",
+			element: <SecondStepContent />,
+		  },
+		  {
+			path: "addons",
+			element: <ThirdStepContent />,
+		  },
+		  {
+			path: "summary",
+			element: <FourthStepContent />,
+		  },
+	  ],
+	},
+  ]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('main') as HTMLElement
@@ -9,6 +45,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<React.StrictMode>
-		<App />
+		<RouterProvider router={router} />
   	</React.StrictMode>
 );

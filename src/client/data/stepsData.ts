@@ -4,19 +4,23 @@ import { StepProps } from '../components/main/Steps/Step';
 export const stepsData: StepItemProps[] = [
     {
         stepNumber: 0,
-        stepTitle: "Your info"
+        stepTitle: "Your info",
+        path: "/info"
     },
     {
         stepNumber: 1,
-        stepTitle: "Select plan"
+        stepTitle: "Select plan",
+        path: "/plan"
     },
     {
         stepNumber: 2,
-        stepTitle: "Add-ons"
+        stepTitle: "Add-ons",
+        path: "/addons"
     },
     {
         stepNumber: 3,
-        stepTitle: "Summary"
+        stepTitle: "Summary",
+        path: "/summary"
     }
 ];
 
