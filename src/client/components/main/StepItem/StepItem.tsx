@@ -5,8 +5,8 @@ import styles from '../StepItem/_StepItem.module.scss';
 export interface StepItemProps {
     stepNumber: number, 
     stepTitle: string,
-    active?: boolean,
     path: string,
+    active?: boolean,
     onClick?: () => void
 }
 

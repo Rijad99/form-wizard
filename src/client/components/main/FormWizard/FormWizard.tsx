@@ -1,5 +1,5 @@
 import { useState, PropsWithChildren } from 'react'
-import { Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 
 import { Container } from '../../common/Container/Container';
 import { Card } from '../../common/Card/Card';
@@ -25,18 +25,24 @@ const StepsList = (props: PropsWithChildren) => {
 };
 
 export const FormWizard = () => {
-    const [activeStep, setActiveStep] = useState<number>(0);
+    const location = useLocation();
+
+    const step = localStorage.getItem('stepNumber') || 0;
+    const [activeStep, setActiveStep] = useState<number>(+step);
 
     const handleStepChange = (stepNumber: number) => {
         setActiveStep(stepNumber);
+        localStorage.setItem('stepNumber', JSON.stringify(stepNumber));
     }
 
     const handleNextStep = (activeStep: number) => {
         setActiveStep(activeStep + 1);
+        localStorage.setItem('stepNumber', JSON.stringify(activeStep));
     }
 
     const handlePreviousStep = (activeStep: number) => {
         setActiveStep(activeStep - 1);
+        localStorage.setItem('stepNumber', JSON.stringify(activeStep));
     }
 
     const handleConfirm = () => {
@@ -49,25 +55,25 @@ export const FormWizard = () => {
                 <StepsList>
                     {
                         stepsData.map(step => {
+                            const active:boolean = (step.path === location.pathname) || (step.stepNumber === 0 && location.pathname === "/");
+
                             return (
                                 <StepItem 
                                     key={step.stepNumber} 
                                     path={step.path}
-                                    active={activeStep === step.stepNumber} 
-                                    onClick={() => handleStepChange(step.stepNumber)} 
+                                    active={active}
                                     stepNumber={step.stepNumber + 1} 
                                     stepTitle={step.stepTitle} 
+                                    onClick={() => handleStepChange(step.stepNumber)}
                                 />
                             )
                         })
                     }   
                 </StepsList>
                 {
-                    activeStep !== 4 ?
                     <Step stepTitle={stepHeaderData[activeStep].stepTitle} stepSubtitle={stepHeaderData[activeStep].stepSubtitle} stepNumber={activeStep} onClickNext={() => handleNextStep(activeStep)} onClickBack={() => handlePreviousStep(activeStep)} onClickConfirm={() => handleConfirm()} >
                         <Outlet />
-                    </Step> :
-                    <ConfirmDialog />
+                    </Step>
                 }
             </Card>
         </Container>
