@@ -1,4 +1,4 @@
-import { useState, PropsWithChildren } from 'react'
+import { useState, useEffect, PropsWithChildren } from 'react'
 import { useLocation, Outlet } from "react-router-dom";
 
 import { Container } from '../../common/Container/Container';
@@ -30,6 +30,17 @@ export const FormWizard = () => {
     const step = localStorage.getItem('stepNumber') || 0;
     const [activeStep, setActiveStep] = useState<number>(+step);
 
+    useEffect(() => {
+        if (location.pathname === "/") {
+            setActiveStep(0)
+            localStorage.setItem('stepNumber', JSON.stringify(0));
+        }
+
+        if (location.pathname === "/confirmation") {
+            setActiveStep(4);
+        }
+    }, [])
+
     const handleStepChange = (stepNumber: number) => {
         setActiveStep(stepNumber);
         localStorage.setItem('stepNumber', JSON.stringify(stepNumber));
@@ -37,12 +48,12 @@ export const FormWizard = () => {
 
     const handleNextStep = (activeStep: number) => {
         setActiveStep(activeStep + 1);
-        localStorage.setItem('stepNumber', JSON.stringify(activeStep));
+        localStorage.setItem('stepNumber', JSON.stringify(activeStep + 1));
     }
 
     const handlePreviousStep = (activeStep: number) => {
         setActiveStep(activeStep - 1);
-        localStorage.setItem('stepNumber', JSON.stringify(activeStep));
+        localStorage.setItem('stepNumber', JSON.stringify(activeStep - 1));
     }
 
     const handleConfirm = () => {
@@ -71,7 +82,7 @@ export const FormWizard = () => {
                     }   
                 </StepsList>
                 {
-                    <Step stepTitle={stepHeaderData[activeStep].stepTitle} stepSubtitle={stepHeaderData[activeStep].stepSubtitle} stepNumber={activeStep} onClickNext={() => handleNextStep(activeStep)} onClickBack={() => handlePreviousStep(activeStep)} onClickConfirm={() => handleConfirm()} >
+                    <Step stepTitle={stepHeaderData[activeStep]?.stepTitle} stepSubtitle={stepHeaderData[activeStep]?.stepSubtitle} stepNumber={activeStep} onClickNext={() => handleNextStep(activeStep)} onClickBack={() => handlePreviousStep(activeStep)} onClickConfirm={() => handleConfirm()} >
                         <Outlet />
                     </Step>
                 }

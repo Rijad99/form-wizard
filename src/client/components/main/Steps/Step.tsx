@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Button } from '../../common/Button/Button';
 
@@ -7,8 +8,8 @@ import buttonStyles from '../../common/Button/_Button.module.scss';
 import utilityClasses from '../../../scss/_utilities.module.scss';
 
 export interface StepProps {
-    stepTitle: string,
-    stepSubtitle: string,
+    stepTitle?: string,
+    stepSubtitle?: string,
     stepNumber?: number,
     onClickNext?: () => void,
     onClickBack?: () => void,
@@ -20,20 +21,26 @@ export const Step = (props: PropsWithChildren<StepProps>) => {
     const renderStepFooterButtons = (step: number) => {
         switch(step) {
             case 0: 
-                return <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} onClick={props.onClickNext} />
+                return <Link to="/plan"><Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} onClick={props.onClickNext} /></Link>
             case 1:
+                return (
+                    <>
+                        <Link to="/info"><Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} onClick={props.onClickBack} /></Link>
+                        <Link to="/addons"><Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} onClick={props.onClickNext} /></Link>
+                    </>
+                )
             case 2:
                 return (
                     <>
-                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} onClick={props.onClickBack} />
-                        <Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} onClick={props.onClickNext} />
+                        <Link to="/plan"><Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} onClick={props.onClickBack} /></Link>
+                        <Link to="/summary"><Button text="Next" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnNext} ${props.stepNumber === 0 && utilityClasses.alignToRight}`} onClick={props.onClickNext} /></Link>
                     </>
                 )
             case 3:
                 return (
                     <>
-                        <Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} onClick={props.onClickBack} />
-                        <Button text="Confirm" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnConfirm}`} onClick={props.onClickConfirm} />
+                        <Link to="/addons"><Button text="Go Back" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnBack}`} onClick={props.onClickBack} /></Link>
+                        <Link to="/confirmation"><Button text="Confirm" additionalClasses={`${buttonStyles.btnMedium} ${buttonStyles.btnConfirm}`} onClick={props.onClickConfirm} /></Link>
                     </>
                 )
         }
@@ -42,8 +49,14 @@ export const Step = (props: PropsWithChildren<StepProps>) => {
     return (
         <div className={styles.formContentGrid}>
             <div className={styles.stepHeader}>
-                <h1 className={styles.stepTitle}>{props.stepTitle}</h1>
-                <p className={styles.stepSubtitle}>{props.stepSubtitle}</p>
+                {
+                    props.stepNumber! < 4 ? (
+                        <>
+                            <h1 className={styles.stepTitle}>{props.stepTitle}</h1>
+                            <p className={styles.stepSubtitle}>{props.stepSubtitle}</p>
+                        </>
+                    ) : null
+                }
             </div>
             <div className={styles.stepContent}>
                 {props.children}

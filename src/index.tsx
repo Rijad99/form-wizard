@@ -7,6 +7,7 @@ import { FirstStepContent } from './client/components/main/Steps/FirstStepConten
 import { FourthStepContent } from './client/components/main/Steps/FourthStepContent/FourthStepContent';
 import { SecondStepContent } from './client/components/main/Steps/SecondStepContent/SecondStepContent';
 import { ThirdStepContent } from './client/components/main/Steps/ThirdStepContent/ThirdStepContent';
+import { ConfirmDialog } from './client/components/main/ConfirmDialog/ConfirmDialog';
 
 import "./client/scss/_global.scss";
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
 		  {
 			path: "summary",
 			element: <FourthStepContent />,
+		  },
+		  {
+			path: "confirmation",
+			element: <ConfirmDialog />,
 		  },
 	  ],
 	},
