@@ -5,7 +5,6 @@ import { Container } from '../../common/Container/Container';
 import { Card } from '../../common/Card/Card';
 import { StepItem } from '../StepItem/StepItem';
 import { Step } from '../Steps/Step';
-import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 
 import { stepsData, stepHeaderData } from '../../../data/stepsData';
 
@@ -83,7 +82,7 @@ export const FormWizard = () => {
                 </StepsList>
                 {
                     <Step stepTitle={stepHeaderData[activeStep]?.stepTitle} stepSubtitle={stepHeaderData[activeStep]?.stepSubtitle} stepNumber={activeStep} onClickNext={() => handleNextStep(activeStep)} onClickBack={() => handlePreviousStep(activeStep)} onClickConfirm={() => handleConfirm()} >
-                        <Outlet />
+                        <Outlet context={[activeStep, setActiveStep]} />
                     </Step>
                 }
             </Card>

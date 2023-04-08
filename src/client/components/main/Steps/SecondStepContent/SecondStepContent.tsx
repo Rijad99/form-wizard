@@ -35,15 +35,18 @@ const PlanCard = forwardRef<HTMLDivElement, PlanCardProps>((props, ref) => {
 interface ToggleProps {
     plan: string,
     additionalClasses?: string,
+
     onClick: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
 const Toggle = (props: ToggleProps) => {
+    const monthlyOrYearly = JSON.parse(localStorage.getItem('monthlyOrYearly') || 'monthly');
+
     return (
         <div className={`${styles.toggleContainer} ${props?.additionalClasses ? props.additionalClasses : ''}`}>
             <span className={`${styles.pricingPlan} ${props.plan === 'monthly' ? styles.activePlan : ''}`}>Monthly</span>
             <div className={styles.toggle}>
-                <div className={styles.circle} onClick={props.onClick}></div>
+                <div className={`${styles.circle} ${monthlyOrYearly === 'yearly' && styles.toRight}`} onClick={props.onClick}></div>
             </div>
             <span className={`${styles.pricingPlan} ${props.plan === 'yearly' ? styles.activePlan : ''}`}>Yearly</span>
         </div>
@@ -58,6 +61,8 @@ export const SecondStepContent = () => {
 
     useEffect(() => {
         const plan = localStorage.getItem('selectedPlan') || '0';
+        const monthlyOrYearly = JSON.parse(localStorage.getItem('monthlyOrYearly') || 'monthly');
+        setToggle(monthlyOrYearly);
 
         if (selectedPlan !== plan) {
             setSelectedPlan(plan);
@@ -82,7 +87,10 @@ export const SecondStepContent = () => {
     }
 
     const handleToggleChange = (e: React.MouseEvent<HTMLDivElement>) => {
-        toggle === 'monthly' ? setToggle('yearly') : setToggle('monthly');
+        const monthlyOrYearly =  toggle === 'monthly' ? 'yearly' : 'monthly';
+        setToggle(monthlyOrYearly);
+
+        localStorage.setItem('monthlyOrYearly', JSON.stringify(monthlyOrYearly));
 
         e.currentTarget.classList.toggle(styles.toRight);
     }

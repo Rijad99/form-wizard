@@ -85,10 +85,11 @@
 
     .stepsList {
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: space-between;
 
-        .step {
+        .link {
             margin-bottom: unset;
         }
     }
@@ -119,8 +120,18 @@
 
     .stepsList {
 
-        .step {
+        .link:not(:last-child) {
             margin-right: 1rem !important;
+        }
+
+        .link:last-child {
+            
+            .step {
+
+                .stepCircle {
+                    margin-right: unset;
+                }
+            }
         }
     }
 }
